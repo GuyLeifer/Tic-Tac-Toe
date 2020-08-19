@@ -9,7 +9,6 @@ app.get("/api/v1/records",(req,res)=>{
 })
 
 app.post("/api/v1/records",(req,res)=>{
-    req.body.id=records.length===0?1:Math.max(...records.map(record=>record.id))+1
     records.push(req.body);
     res.send(req.body);
 })
