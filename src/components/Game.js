@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { calculateWinner } from '../helpers';
 import Board from './Board';
 import Modal from '@material-ui/core/Modal';
+import ScoreTable from './ScoreTable';
 const axios = require ('axios');
 
 
@@ -14,7 +15,7 @@ const Game = () => {
     const [board, setBoard] = useState(Array(9).fill(null));
     const [xIsNext, setXisNext] = useState(true);
     let winner = calculateWinner(board);
-    const [win, setWin] = useState(false);
+    const [scores, setScores] = useState([]);
 
     const handleClick = i => {
         const boardCopy = [...board];
@@ -40,7 +41,9 @@ const Game = () => {
         let name = e.target.previousElementSibling.value;
         let date = new Date();
         if (name != "") {
-        // axios.post('/api/v1/records', { name, date })
+        axios.post('/api/v1/records', { name, date })
+        .then(res => res.json())
+        .then(res => setScores(res))
         setBoard(Array(9).fill(null));
         }
     }
@@ -66,12 +69,13 @@ const Game = () => {
                     open = {winner?true:false}
                     date = {new Date()}
                     >
-                    <div style ={style}>
-                         <p>Insert Your Name</p>
-                         <input></input>
-                         <button onClick={setName}>Enter Name</button>
-                     </div>
-                </Modal>
+                <div style ={style}>
+                     <p>Insert Your Name</p>
+                     <input></input>
+                     <button onClick={setName}>Enter Name</button>
+                </div>
+            </Modal>
+            <ScoreTable scores={scores} />
         </>
     )
 }
