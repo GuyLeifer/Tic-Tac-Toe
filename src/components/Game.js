@@ -27,7 +27,7 @@ const Game = () => {
         // Put an X or an O in the clicked square
         boardCopy[i] = xIsNext ? 'X' : 'O';
         setBoard(boardCopy);
-        startTime = startTime === 0 ? new Date() : "";
+        startTime = startTime === 0 ? new Date() : 0;
         setXisNext(!xIsNext);
     }
 
@@ -43,11 +43,12 @@ const Game = () => {
 
     const setName = (e) => {
         let name = e.target.previousElementSibling.value;
-        let endTime = new Date();
-        let duration = endTime - startTime;
+        let date = new Date();
+        let duration = (date - startTime)/1000+" s";
         if (name != "") {
-        axios.post('/api/v1/records', { name, endTime, duration })
+        axios.post('/api/v1/records', { name, date, duration })
         .then(res => setScores(res.data))
+        console.log(startTime);
         setBoard(Array(9).fill(null));
         startTime = 0;
         }

@@ -26,6 +26,7 @@ function ScoreTable({scores}) {
                     <div>Game Number: {score.id}</div>
                     <div>Name: {score.name}</div>
                     <div>Date: {score.date}</div>
+                    <div>Duration: {score.duration}</div>
                 </div>) }
             {/* </div> */}
         </div>
