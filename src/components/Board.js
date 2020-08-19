@@ -2,6 +2,7 @@ import React from 'react';
 import Square from './Square';
 
 const style = {
+    backgroundColor: 'lightBlue',
     border: '4px solid darkblue',
     borderRadius: '10px',
     width: '250px',

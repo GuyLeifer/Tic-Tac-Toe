@@ -1,5 +1,6 @@
 import React from 'react';
 import Game from './components/Game';
+import './style.css';
 
 const style = {
     background: 'lightblue',
@@ -8,7 +9,9 @@ const style = {
     fontWeight: '800',
     cursor: 'pointer',
     outline: 'none',
-    
+    textAlign: 'center',
+    width: '200px',
+    margin: '30px auto'  
 }
 
 

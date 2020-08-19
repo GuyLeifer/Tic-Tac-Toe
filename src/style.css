@@ -1,0 +1,11 @@
+body {
+    background-color: lightblue;
+}
+.History {
+    background: lightblue;
+    color: darkblue;
+    font-size: 15px;
+    font-weight: 400;
+    margin: 50px;
+    border: 1px solid darkblue;
+}

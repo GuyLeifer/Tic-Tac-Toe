@@ -9,7 +9,10 @@ const axios = require ('axios');
 const styles = {
     width: '200px',
     margin: '20px auto',
+    textAlign: 'center'
 };
+
+let startTime = 0;
 
 const Game = () => {
     const [board, setBoard] = useState(Array(9).fill(null));
@@ -24,6 +27,7 @@ const Game = () => {
         // Put an X or an O in the clicked square
         boardCopy[i] = xIsNext ? 'X' : 'O';
         setBoard(boardCopy);
+        startTime = startTime === 0 ? new Date() : "";
         setXisNext(!xIsNext);
     }
 
@@ -39,12 +43,13 @@ const Game = () => {
 
     const setName = (e) => {
         let name = e.target.previousElementSibling.value;
-        let date = new Date();
+        let endTime = new Date();
+        let duration = endTime - startTime;
         if (name != "") {
-        axios.post('/api/v1/records', { name, date })
-        .then(res => res.json())
-        .then(res => setScores(res))
+        axios.post('/api/v1/records', { name, endTime, duration })
+        .then(res => setScores(res.data))
         setBoard(Array(9).fill(null));
+        startTime = 0;
         }
     }
 
@@ -57,6 +62,12 @@ const Game = () => {
         outline: 'none',  
     }
 
+    // useEffect(() => 
+    //     return (
+           
+    //     )
+    // }, [])
+
     return (
         <>
             <Board squares={board} onClick={handleClick} />
@@ -66,7 +77,7 @@ const Game = () => {
                 
             </div>
             <Modal
-                    open = {winner?true:false}
+                    open = {winner ? true : false}
                     date = {new Date()}
                     >
                 <div style ={style}>
