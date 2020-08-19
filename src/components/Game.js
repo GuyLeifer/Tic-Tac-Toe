@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { calculateWinner } from '../helpers';
 import Board from './Board';
 import Modal from '@material-ui/core/Modal';
@@ -19,7 +19,7 @@ const Game = () => {
     const [xIsNext, setXisNext] = useState(true);
     let winner = calculateWinner(board);
     const [scores, setScores] = useState([]);
-
+    useEffect(()=>axios.get('/api/v1/records').then(res=>setScores(res.data)),[])
     const handleClick = i => {
         const boardCopy = [...board];
         // If user click an occupied square or if game is won, return
