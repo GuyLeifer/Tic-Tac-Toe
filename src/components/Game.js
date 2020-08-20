@@ -30,7 +30,6 @@ const Game = () => {
         startTime = startTime === 0 ? new Date() : 0;
         setXisNext(!xIsNext);
     }
-
     const jumpTo = () => {
 
     }
@@ -42,7 +41,10 @@ const Game = () => {
     // )
 
         const restartGame = () => (
-        <button onClick={() => setBoard(Array(9).fill(null))}>
+        <button onClick={() => {
+            setBoard(Array(9).fill(null));
+            startTime = 0;
+        }}>
             Restart Game
         </button>
     )
