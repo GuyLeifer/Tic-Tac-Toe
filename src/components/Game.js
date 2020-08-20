@@ -35,9 +35,15 @@ const Game = () => {
 
     }
 
-    const renderMoves = () => (
+    // const renderMoves = () => (
+    //     <button onClick={() => setBoard(Array(9).fill(null))}>
+    //         Start Game
+    //     </button>
+    // )
+
+        const restartGame = () => (
         <button onClick={() => setBoard(Array(9).fill(null))}>
-            Start Game
+            Restart Game
         </button>
     )
 
@@ -60,7 +66,8 @@ const Game = () => {
         fontSize: '30px',
         fontWeight: '800',
         cursor: 'pointer',
-        outline: 'none',  
+        outline: 'none', 
+        color: 'darkblue',
     }
 
     // useEffect(() => 
@@ -74,16 +81,17 @@ const Game = () => {
             <Board squares={board} onClick={handleClick} />
             <div style={styles}>
                 <p>{winner ? 'Winner: ' + winner : 'Next Player: ' + (xIsNext ? 'X' : 'O')}</p>
-                {renderMoves()}
+                {/* {renderMoves()} */}
+                {restartGame()}
                 
             </div>
-            <Modal
+            <Modal style={styles}
                     open = {winner ? true : false}
                     date = {new Date()}
                     >
                 <div style ={style}>
                      <p>Insert Your Name</p>
-                     <input></input>
+                     <input placeholder="Name is Required"></input>
                      <button onClick={setName}>Enter Name</button>
                 </div>
             </Modal>
