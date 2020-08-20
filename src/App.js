@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState } from 'react';
 import Game from './components/Game';
 import './style.css';
+import Timer from "./components/Timer";
 
 const style = {
     background: 'lightblue',
@@ -16,10 +17,12 @@ const style = {
 
 
 const App = () => {
+    const [startTimer,setTimer]=useState(false)
     return (
         <>
             <h1 style={style}>Tic - Tac - Toe</h1>
-            <Game />
+            <Timer start={startTimer}/>
+            <Game timer={(state)=>setTimer(state)}/>
         </>
     )
  };

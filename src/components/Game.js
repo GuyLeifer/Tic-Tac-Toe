@@ -3,6 +3,7 @@ import { calculateWinner } from '../helpers';
 import Board from './Board';
 import Modal from '@material-ui/core/Modal';
 import ScoreTable from './ScoreTable';
+
 const axios = require ('axios');
 
 
@@ -14,12 +15,13 @@ const styles = {
 
 let startTime = 0;
 
-const Game = () => {
+const Game = (props) => {
     const [board, setBoard] = useState(Array(9).fill(null));
     const [xIsNext, setXisNext] = useState(true);
     let winner = calculateWinner(board);
     const [scores, setScores] = useState([]);
-
+    
+    const setTimer=(state)=>props.timer(state)
     useEffect( () => 
     axios.get('/api/v1/records')
     .then(res => setScores(res.data)),[])
@@ -27,6 +29,7 @@ const Game = () => {
     const handleClick = i => {
         if(startTime === 0){
             startTime = new Date();
+            setTimer(true);
         }
         const boardCopy = [...board];
         // If user click an occupied square or if game is won, return
@@ -57,6 +60,7 @@ const Game = () => {
     )
 
     const setName = (e) => {
+        setTimer(false)
         let name = e.target.previousElementSibling.value;
         let date = new Date();
         let duration = (date - startTime)/1000+" s";
@@ -87,6 +91,7 @@ const Game = () => {
 
     return (
         <>
+            
             <Board squares={board} onClick={handleClick} />
             <div style={styles}>
                 <p>{winner ? 'Winner: ' + winner : 'Next Player: ' + (xIsNext ? 'X' : 'O')}</p>
