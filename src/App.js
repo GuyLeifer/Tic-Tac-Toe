@@ -22,7 +22,7 @@ const App = () => {
         <>
             <h1 style={style}>Tic - Tac - Toe</h1>
             <Timer start={startTimer}/>
-            <Game timer={(state)=>setTimer(state)}/>
+            <Game timer={(state)=>setTimer(state)} start={startTimer}/>
         </>
     )
  };

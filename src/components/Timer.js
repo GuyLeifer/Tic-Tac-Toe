@@ -19,7 +19,7 @@ function Timer(props){
         }
     }, [props.start])
     return(
-    <div className="timer">{timeElapsed}</div>
+    <div className="timer">Game Time: {timeElapsed}'s</div>
     )
 }
 

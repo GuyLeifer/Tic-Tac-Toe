@@ -49,7 +49,7 @@ const Game = (props) => {
     //         Start Game
     //     </button>
     // )
-
+    console.log(props.start)
         const restartGame = () => (
         <button onClick={() => {
             setBoard(Array(9).fill(null));
@@ -57,6 +57,7 @@ const Game = (props) => {
         }}>
             Restart Game
         </button>
+        // props.start = false;
     )
 
     const setName = (e) => {

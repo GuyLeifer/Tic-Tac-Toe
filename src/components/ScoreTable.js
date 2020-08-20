@@ -15,7 +15,8 @@ const style2 = {
     fontSize: '15px',
     fontWeight: '400',
     margin: '50px',
-    border: '1px solid darkblue'
+    border: '1px solid darkblue',
+    width: '100px',
 }
 
 function ScoreTable({scores}) {
