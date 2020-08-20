@@ -20,8 +20,8 @@ const Game = (props) => {
     const [xIsNext, setXisNext] = useState(true);
     let winner = calculateWinner(board);
     const [scores, setScores] = useState([]);
-    
-    const setTimer=(state)=>props.timer(state)
+    const setTimer = (state) => props.timer(state);
+
     useEffect( () => 
     axios.get('/api/v1/records')
     .then(res => setScores(res.data)),[])
@@ -37,27 +37,19 @@ const Game = (props) => {
         // Put an X or an O in the clicked square
         boardCopy[i] = xIsNext ? 'X' : 'O';
         setBoard(boardCopy);
-
         setXisNext(!xIsNext);
     }
-    const jumpTo = () => {
 
-    }
 
-    // const renderMoves = () => (
-    //     <button onClick={() => setBoard(Array(9).fill(null))}>
-    //         Start Game
-    //     </button>
-    // )
-    console.log(props.start)
         const restartGame = () => (
         <button onClick={() => {
             setBoard(Array(9).fill(null));
             startTime = 0;
+            setTimer(false);
         }}>
             Restart Game
         </button>
-        // props.start = false;
+        
     )
 
     const setName = (e) => {
@@ -68,7 +60,6 @@ const Game = (props) => {
         if (name != "") {
         axios.post('/api/v1/records', { name, date, duration })
         .then(res => setScores(res.data))
-        console.log(startTime);
         setBoard(Array(9).fill(null));
         startTime = 0;
         }
@@ -84,18 +75,18 @@ const Game = (props) => {
         color: 'darkblue',
     }
 
-    // useEffect(() => 
-    //     return (
-           
-    //     )
-    // }, [])
+    const style2 = {
+        textDecoration: 'underline',
+        fontSize: '30px'
+    }
+
 
     return (
         <>
             
             <Board squares={board} onClick={handleClick} />
             <div style={styles}>
-                <p>{winner ? 'Winner: ' + winner : 'Next Player: ' + (xIsNext ? 'X' : 'O')}</p>
+                <p style={style2}>{winner ? 'Winner: ' + winner : 'Next Player: ' + (xIsNext ? 'X' : 'O')}</p>
                 {/* {renderMoves()} */}
                 {restartGame()}
                 
