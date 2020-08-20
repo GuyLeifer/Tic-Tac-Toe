@@ -19,10 +19,14 @@ const Game = () => {
     const [xIsNext, setXisNext] = useState(true);
     let winner = calculateWinner(board);
     const [scores, setScores] = useState([]);
-    useEffect(()=>axios.get('/api/v1/records').then(res=>setScores(res.data)),[])
+
+    useEffect( () => 
+    axios.get('/api/v1/records')
+    .then(res => setScores(res.data)),[])
+
     const handleClick = i => {
-        if(startTime===0){
-            startTime=new Date()
+        if(startTime === 0){
+            startTime = new Date();
         }
         const boardCopy = [...board];
         // If user click an occupied square or if game is won, return
@@ -30,8 +34,7 @@ const Game = () => {
         // Put an X or an O in the clicked square
         boardCopy[i] = xIsNext ? 'X' : 'O';
         setBoard(boardCopy);
-        //startTime = startTime === 0 ? new Date() : 0;
-        debugger;
+
         setXisNext(!xIsNext);
     }
     const jumpTo = () => {
