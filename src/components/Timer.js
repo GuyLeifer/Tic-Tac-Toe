@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useDebugValue } from "react";
-
+import "./Timer.css"
 
 function Timer(props){
     const [timeElapsed,setTimeElapsed]=useState(0)
@@ -19,7 +19,10 @@ function Timer(props){
         }
     }, [props.start])
     return(
-    <div className="timer">Game Time: {timeElapsed}'s</div>
+
+=======
+    <div className="timer">{timeElapsed.toString().padStart(2,"0")}</div>
+>>>>>>> 93463088526dbd1301543bcb927445e66b75862f
     )
 }
 
