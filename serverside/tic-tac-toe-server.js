@@ -3,11 +3,13 @@ const express = require("express");
 
 const app = express();
 app.use(express.json());
-app.use(express.static("../build"))
+
+app.use(express.static("../build"));
+
 const records = JSON.parse(fs.readFileSync("scores.json"));
 
 app.get("/api/v1/records", (req,res) => {
-    res.send(records)
+    res.send(records);
 });
 
 app.post("/api/v1/records", (req,res) => {
