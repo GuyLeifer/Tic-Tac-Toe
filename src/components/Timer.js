@@ -19,10 +19,7 @@ function Timer(props){
         }
     }, [props.start])
     return(
-
-=======
     <div className="timer">{timeElapsed.toString().padStart(2,"0")}</div>
->>>>>>> 93463088526dbd1301543bcb927445e66b75862f
     )
 }
 
