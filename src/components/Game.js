@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { calculateWinner } from '../helpers';
 import Board from './Board';
 import Modal from '@material-ui/core/Modal';
@@ -19,7 +19,7 @@ const Game = () => {
     const [xIsNext, setXisNext] = useState(true);
     let winner = calculateWinner(board);
     const [scores, setScores] = useState([]);
-
+    useEffect(()=>axios.get('/api/v1/records').then(res=>setScores(res.data)),[])
     const handleClick = i => {
         const boardCopy = [...board];
         // If user click an occupied square or if game is won, return
@@ -27,7 +27,7 @@ const Game = () => {
         // Put an X or an O in the clicked square
         boardCopy[i] = xIsNext ? 'X' : 'O';
         setBoard(boardCopy);
-        startTime = startTime === 0 ? new Date() : "";
+        startTime = startTime === 0 ? new Date() : 0;
         setXisNext(!xIsNext);
     }
 
@@ -43,11 +43,12 @@ const Game = () => {
 
     const setName = (e) => {
         let name = e.target.previousElementSibling.value;
-        let endTime = new Date();
-        let duration = endTime - startTime;
+        let date = new Date();
+        let duration = (date - startTime)/1000+" s";
         if (name != "") {
-        axios.post('/api/v1/records', { name, endTime, duration })
+        axios.post('/api/v1/records', { name, date, duration })
         .then(res => setScores(res.data))
+        console.log(startTime);
         setBoard(Array(9).fill(null));
         startTime = 0;
         }
