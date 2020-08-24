@@ -2,11 +2,7 @@ const puppeteer=require("puppeteer")
 
 describe("app test",()=>{
 test ("check for x or o on click", async()=>{
-    const browser=await puppeteer.launch({
-        headless:false,
-        slowMo:50,
-        args:['--window-size=1200,800']
-    })
+    const browser=await puppeteer.launch()
     const page=await browser.newPage()
     await page.goto("http://localhost:4000/")
     await page.click("button:nth-child(1)")
@@ -19,11 +15,7 @@ test ("check for x or o on click", async()=>{
 },10000)
 
 test("can win",async()=>{
-    const browser=await puppeteer.launch({
-        headless:false,
-        slowMo:50,
-        args:['--window-size=1200,800']
-    })
+    const browser=await puppeteer.launch()
     const page=await browser.newPage()
     await page.goto("http://localhost:4000/")
     for (let i=1;i<8;i++){
@@ -35,11 +27,7 @@ test("can win",async()=>{
 },10000)
 
 test("can win",async()=>{
-    const browser=await puppeteer.launch({
-        headless:false,
-        slowMo:50,
-        args:['--window-size=1200,800']
-    })
+    const browser=await puppeteer.launch()
     const page=await browser.newPage()
     await page.goto("http://localhost:4000/")
     for (let i=1;i<8;i++){
